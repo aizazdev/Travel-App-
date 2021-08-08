@@ -1,7 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const Maps = ()=> {
+const Maps = ({setCoordinates, setBounds, coordinates})=> {
     const defaultProps = {
         center: {
           lat: 10.99835602,
@@ -14,9 +14,13 @@ const Maps = ()=> {
         bootstrapURLKeys={{ key: "AIzaSyDpoyFr2fdi3iiCa_OwqKrO66d0c8LLRQg" }}
         defaultCenter={defaultProps.center}
         defaultZoom={14}
-        center={defaultProps.center}
+        center={coordinates}
         options={''}
-        onChange={''}
+        onChange={(e)=>{
+          console.log("bounds in maps", e.bounds);
+          setCoordinates({lat: e.center.lat, lng: e.center.lng});
+          setBounds({ne: e.bounds.ne, sw: e.bounds.sw})
+        }}
         onChildClick={''}
       >
 

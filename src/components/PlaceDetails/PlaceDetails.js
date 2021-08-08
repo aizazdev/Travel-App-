@@ -19,7 +19,6 @@ const useStyles = makeStyles({
 
 
 const PlaceDetails = ({place})=> {
-  console.log("p is ", place);
   const classes = useStyles();
   return (
       place.name
