@@ -9,11 +9,17 @@ const App = ()=> {
   const[places, setPlaces] = useState([]);
   const[coordinates, setCoordinates] = useState({});
   const[bounds, setBounds] = useState(null);
-
+  const[data, setData] = useState("");
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}})=> {
       setCoordinates({lat: latitude, lng: longitude});
-    })
+    });
+    const fetchData = async()=> {
+      const d = await fetch("/.netlify/functions/Aizaz?name=from Serverless Function again");
+      const {message} = await d.json();
+      setData(message);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -28,6 +34,7 @@ const App = ()=> {
       <Header />
       <Grid container spacing={3} style={{width: "100%"}}>
         <Grid item xs={12} md={4}>
+        <h2>{data}</h2>
           <Lists />
         </Grid>
         <Grid item xs={12} md={8}>
